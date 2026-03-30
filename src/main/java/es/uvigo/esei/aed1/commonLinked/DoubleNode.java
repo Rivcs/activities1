@@ -2,10 +2,9 @@
 package es.uvigo.esei.aed1.commonLinked;
 
 public class DoubleNode {
+  private DoubleNode next;
   private DoubleNode previous;
   private int value;
-  private DoubleNode next;
-
 
   public DoubleNode(DoubleNode previous, int value, DoubleNode next) {
     this.previous = previous;

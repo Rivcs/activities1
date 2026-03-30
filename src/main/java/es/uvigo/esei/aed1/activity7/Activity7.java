@@ -10,20 +10,49 @@ public class Activity7 {
 
   // Exercise 1
   public static List<Integer> getHigherThan(List<Integer> listToFilter, int threshold) throws NullPointerException {
-    return null;
+
+    if (listToFilter == null) {
+      throw new NullPointerException();
+    }
+
+    List<Integer> result = new LinkedList<>();
+    for (Integer i : listToFilter) {
+      if (i > threshold) {
+        result.addLast(i);
+      }
+    }
+    return result;
   }
 
   // Exercise 2
   public static <T> List<T> invert(List<T> list) throws NullPointerException {
-    return null;
+
+    if (list == null) {
+      throw new NullPointerException();
+    }
+    List<T> result = new LinkedList<>();
+    for (T i : list) {
+      result.addFirst(i);
+    }
+    return result;
   }
 
   // Exercise 3
   private static <T> int countValueAppearances(List<T> list, T referenceValue) {
-    return 0;
+    int count = 0;
+    for (T value : list) {
+      if (value.equals(referenceValue)) {
+        count++;
+      }
+    }
+    return count;
   }
 
   public static <T> boolean allValuesAppearancesAreEqual(List<T> list) throws NullPointerException {
+    if (list == null) {
+      throw new NullPointerException();
+    }
+
     return true;
   }
 
@@ -32,12 +61,12 @@ public class Activity7 {
     return true;
   }
 
-  //Exercise 5
+  // Exercise 5
   public static <T> List<T> buildListWithRepeatedValues(List<T> list) throws NullPointerException {
     return null;
   }
 
-  //Exercise 6
+  // Exercise 6
   private static <T> boolean countTuplesWithAValue(List<Terna<T>> list, T value) {
     return true;
   }
@@ -46,27 +75,27 @@ public class Activity7 {
     return null;
   }
 
-  //Exercise 7
+  // Exercise 7
   public static int countValuesEqualSumPreceding(List<Integer> list) throws NullPointerException {
     return 0;
   }
 
-  //Exercise 8
+  // Exercise 8
   public static <T> List<T> printLots(List<T> list, List<Integer> index) throws NullPointerException {
     return null;
   }
 
-  //Exercise 9
+  // Exercise 9
   public static void duplicateValues(List<Integer> list) throws NullPointerException {
-    
+
   }
-  
-  //Exercise 10
+
+  // Exercise 10
   public static Integer getMorePatients(Hospital chuo) {
     return null;
   }
-  
-  //Exercise 11
+
+  // Exercise 11
   // En este ejercicio debes implementar los métodos get y set de la clase
   // es.uvigo.esei.aed1.activity7.sparsematrix.ListNumberSparseMatrix
 
