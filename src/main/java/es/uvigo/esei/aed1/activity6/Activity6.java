@@ -33,13 +33,72 @@ public class Activity6 {
 
     // Exercise 2
     public static <T> Queue<T> copy(Queue<T> queue) throws NullPointerException {
-        return null;
+        if (queue == null) {
+            throw new NullPointerException();
+        }
+        Queue<T> tempQueue = new LinkedQueue<>();
+        Queue<T> copyQueue = new LinkedQueue<>();
+
+        // Vaciamos la original en una temporal
+        while (!queue.isEmpty()) {
+            tempQueue.add(queue.remove());
+        }
+
+        // Volvemos a llenar la original y la copia
+        while (!tempQueue.isEmpty()) {
+            T value = tempQueue.remove();
+            queue.add(value);
+            copyQueue.add(value);
+        }
+
+        return copyQueue;
     }
 
     // Exercise 3
     public static Queue<Integer> mixInOrderly(Queue<Integer> queue1, Queue<Integer> queue2)
             throws NullPointerException {
-        return null;
+        if (queue1 == null || queue2 == null) {
+            throw new NullPointerException();
+        }
+
+        Queue<Integer> queuemixed = new LinkedQueue<>();
+        int sizeQueue1 = queue1.size();
+        int sizeQueue2 = queue2.size();
+        int processedQueue1 = 0;
+        int processedQueue2 = 0;
+
+        while (processedQueue1 < sizeQueue1 || processedQueue2 < sizeQueue2) {
+            boolean takeValueQueue1 = processedQueue1 < sizeQueue1;
+            boolean takeValueQueue2 = processedQueue2 < sizeQueue2;
+
+            // Si ambas tienen elementos por procesar, decidimos de cuál coger
+            if (takeValueQueue1 && takeValueQueue2) {
+                if (queue1.first() < queue2.first()) { // Si el primero de la cola 1 es menor que el primero de la cola
+                                                       // 2
+                    takeValueQueue2 = false;
+                } else if (queue2.first() < queue1.first()) { // Si el primero de la cola 2 es menor que el primero de
+                                                              // la cola 1
+                    takeValueQueue1 = false;
+                }
+                // Si son iguales, ambos `take` se quedan en true para avanzar las dos a la vez
+            }
+
+            Integer smaller = takeValueQueue1 ? queue1.first() : queue2.first();
+
+            // Insertamos directamente el número que hemos elegido
+            queuemixed.add(smaller);
+
+            // Aplicamos la rotación
+            if (takeValueQueue1) {
+                queue1.add(queue1.remove());
+                processedQueue1++;
+            }
+            if (takeValueQueue2) {
+                queue2.add(queue2.remove());
+                processedQueue2++;
+            }
+        }
+        return queuemixed;
     }
 
     // Exercise 4
