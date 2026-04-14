@@ -6,7 +6,7 @@ public interface CustomQueue<T> {
    * Comprueba si la cola está vacía. Es decir, no tiene elementos.
    *
    * @return <code>true</code> si la cola está vacía. <code>false</code> en caso
-   * contrario.
+   *         contrario.
    */
   public boolean isEmpty();
 

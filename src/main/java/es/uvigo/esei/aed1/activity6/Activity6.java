@@ -2,6 +2,7 @@
 package es.uvigo.esei.aed1.activity6;
 
 import es.uvigo.esei.aed1.activity6.implementation.CustomQueue;
+import es.uvigo.esei.aed1.activity6.implementation.LinkedQueue2Ref;
 import es.uvigo.esei.aed1.tads.queue.LinkedQueue;
 import es.uvigo.esei.aed1.tads.queue.Queue;
 
@@ -53,7 +54,26 @@ public class Activity6 {
 
     // Ejercicio 6
     public static <T> boolean equalsValues(CustomQueue<T> queue) throws NullPointerException {
-        return true;
+        if (queue == null) {
+            throw new NullPointerException("La cola está vacía");
+        }
+        if (queue.isEmpty()) {
+            return true;
+        }
+        boolean equal = true;
+        CustomQueue<T> backupQueue = new LinkedQueue2Ref<>();
+        T value = queue.remove();
+        backupQueue.add(value);
+        while (!queue.isEmpty()) {
+            T removeNext = queue.remove();
+            backupQueue.add(removeNext);
+            if (!value.equals(removeNext)) {
+                equal = false;
+            }
+        }
+        for (int i = 0; i < backupQueue.size(); i++) {
+            queue.add(backupQueue.remove());
+        }
+        return equal;
     }
-
 }
