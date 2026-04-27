@@ -5,13 +5,45 @@ public class SearchAlgorithms {
     // Exercise 1
     public static void fillIn(int[][] aux, int xPosition, int yPosition, int newColor)
             throws IndexOutOfBoundsException {
-
-         // Verificar que las posiciones x,y estén dentro de los límites del tablero
-        if (xPosition < 0 || xPosition >= aux.length || yPosition < 0 || yPosition >= aux[0].length) {
-            throw new IndexOutOfBoundsException("Las posiciones x,y deben estar dentro de los límites del tablero.");
+        if (xPosition < 0 || xPosition >= aux.length || yPosition < 0 || yPosition >= aux[xPosition].length) {
+            throw new IndexOutOfBoundsException();
         }
 
+        int oldColor = aux[xPosition][yPosition];
 
+        if (oldColor == newColor) {
+            return;
+        }
+
+        aux[xPosition][yPosition] = newColor;
+
+        // Hacer fillIn por la izquierda de xPosition, yPosition
+        int col = yPosition - 1;
+        while (col >= 0 && aux[xPosition][col] == oldColor) {
+            aux[xPosition][col] = newColor;
+            col--;
+        }
+
+        // Hacer fillIn por la derecha de xPosition, yPosition
+        col = yPosition + 1;
+        while (col < aux[xPosition].length && aux[xPosition][col] == oldColor) {
+            aux[xPosition][col] = newColor;
+            col++;
+        }
+
+        // Hacer fillIn por arriba de xPosition, yPosition
+        int fil = xPosition - 1;
+        while (fil >= 0 && yPosition < aux[fil].length && aux[fil][yPosition] == oldColor) {
+            aux[fil][yPosition] = newColor;
+            fil--;
+        }
+
+        // Hacer fillIn por debajo de xPosition, yPosition
+        fil = xPosition + 1;
+        while (fil < aux.length && yPosition < aux[fil].length && aux[fil][yPosition] == oldColor) {
+            aux[fil][yPosition] = newColor;
+            fil++;
+        }
     }
 
     // Exercise 2

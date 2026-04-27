@@ -102,12 +102,34 @@ public class Activity6 {
     }
 
     // Exercise 4
-    public static <T> void moveToFront(Queue<T> queue, T value) throws NullPointerException {
+    public static <T> void moveToFront(Queue<T> queue, T value) throws NullPointerException { // Copiar cola sin el
+                                                                                              // valor y añadirlo al
+                                                                                              // final
+        if (queue == null) {
+            throw new NullPointerException();
+        }
+        Queue<T> copyQueueNoValue = new LinkedQueue<>();
 
+        while (!queue.isEmpty()) {
+            T auxValue = queue.remove();
+
+            if (!auxValue.equals(value)) {
+                copyQueueNoValue.add(auxValue);
+            }
+        }
+        queue.add(value);
+        while (!copyQueueNoValue.isEmpty()) {
+            queue.add(copyQueueNoValue.remove());
+        }
     }
 
     // Exercise 5
     public static Integer josephus(Queue<Integer> soldiers, int initialPos, int jump) {
+        while (soldiers.size() != 1) {
+            for (int i = 0; i < jump; i++) {
+                soldiers.add(soldiers.remove());
+            }
+        }
         return 0;
     }
 
